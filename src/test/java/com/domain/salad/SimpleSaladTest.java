@@ -52,8 +52,8 @@ public class SimpleSaladTest {
     }
 
     @Test
-    public void shouldReturn3000WithFullListOfVegetables(){
-        int expected = 3000;
+    public void shouldReturn3050WithFullListOfVegetables(){
+        int expected = 3050;
         int actual = new SimpleSalad(vegetableList).countCalories();
 
         assertEquals(expected, actual);

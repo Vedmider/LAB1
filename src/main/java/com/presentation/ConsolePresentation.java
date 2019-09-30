@@ -29,8 +29,12 @@ public class ConsolePresentation {
         }
 
         int[] calorificRange = getCalorificRange();
+
         for (AbstractVegetable v : salad.getVegetablesWithCaloriesRange(calorificRange[0], calorificRange[1])) {
             System.out.println("Vegetable " + v.getName() + ". CalorificValue: " + v.getCalorificValue());
+        }
+        if (salad.getVegetablesWithCaloriesRange(calorificRange[0], calorificRange[1]).isEmpty()) {
+            System.out.println("There is no vegetables according to your chose");
         }
     }
 
@@ -88,16 +92,16 @@ public class ConsolePresentation {
                     vegetableList.add(new Carrot(vegetableWeight));
                     break;
                 case (2):
-                    vegetableList.add( new Cucumber(vegetableWeight));
+                    vegetableList.add(new Cucumber(vegetableWeight));
                     break;
                 case (3):
-                    vegetableList.add( new Kale(vegetableWeight));
+                    vegetableList.add(new Kale(vegetableWeight));
                     break;
                 case (4):
-                    vegetableList.add( new Onion(vegetableWeight));
+                    vegetableList.add(new Onion(vegetableWeight));
                     break;
                 case (5):
-                    vegetableList.add( new Tomato(vegetableWeight));
+                    vegetableList.add(new Tomato(vegetableWeight));
                     break;
                 default:
                     break;
