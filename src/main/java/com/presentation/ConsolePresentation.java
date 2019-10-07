@@ -2,15 +2,18 @@ package com.presentation;
 
 import com.domain.salad.SimpleSalad;
 import com.domain.vegetable.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class ConsolePresentation {
     private static Map<Integer, String> vegetablesMap;
     private static List<Integer> alreadyPutted;
+    private static final Logger logger = LoggerFactory.getLogger(ConsolePresentation.class);
 
     public static void main(String[] args) {
-
+        logger.debug("Application successfully started");
         System.out.println("This is cooking program\n" +
                 "Available list of vegetables:\n" +
                 "1: Carrot\n" +
@@ -25,16 +28,18 @@ public class ConsolePresentation {
         List<AbstractVegetable> vegetableList = getSaladComponentsFromInput();
         SimpleSalad salad = new SimpleSalad(vegetableList);
         salad.makeSalad();
+
         System.out.println("Calorific value of salad is " + salad.countCalories());
+
         for (AbstractVegetable v : salad.sortByWeight()) {
             System.out.println("Vegetable " + v.getName() + " weight: " + v.getWeight());
         }
-
         int[] calorificRange = getCalorificRange();
 
         for (AbstractVegetable v : salad.getVegetablesWithCaloriesRange(calorificRange[0], calorificRange[1])) {
             System.out.println("Vegetable " + v.getName() + ". CalorificValue: " + v.getCalorificValue());
         }
+
         if (salad.getVegetablesWithCaloriesRange(calorificRange[0], calorificRange[1]).isEmpty()) {
             System.out.println("There is no vegetables according to your chose");
         }
@@ -52,21 +57,25 @@ public class ConsolePresentation {
         vegetablesMap.put(3, "Kale");
         vegetablesMap.put(4, "Onion");
         vegetablesMap.put(5, "Tomato");
+        logger.debug("Initiated vegetableList");
         alreadyPutted = new ArrayList<>();
 
         while (true) {
             input = scanner.nextLine().trim();
 
             if (input.toUpperCase().equals("END")) {
+                logger.info("User chose to END his work with program");
                 System.out.println("You have ended putting vegetables to your salad");
                 break;
             } else if (input.equals("")) {
+                logger.info("user did not enter any  input value ");
                 System.out.println("Please enter values: 1 - vegetable; 2 - weight");
                 continue;
             }
 
             String[] params = input.split("\\s+");
             if (params.length != 2) {
+                logger.error("user entered wrong number of params. Number of params is {}", params.length);
                 System.out.println("Please enter valid number of params");
                 continue;
             }
@@ -101,6 +110,7 @@ public class ConsolePresentation {
             }
 
             if (alreadyPutted.size() == 5) {
+                logger.debug("User filled out his salad with all vegetables");
                 System.out.println("It is 5 types of vegetables in salad");
                 break;
             }
@@ -121,12 +131,14 @@ public class ConsolePresentation {
             input = scanner.nextLine().trim();
 
             if (input.equals("")) {
+                logger.warn("User did not input range of calorific value");
                 System.out.println("Please enter range");
                 continue;
             }
 
             tempStringArray = input.split("\\s+");
             if (tempStringArray.length != 2) {
+                logger.error("User entered {} params. It is wrong quantity.", tempStringArray.length);
                 System.out.println("You entered wrong quantity of params");
                 continue;
             }
@@ -134,8 +146,10 @@ public class ConsolePresentation {
                 calorificRange[i] = Integer.parseInt(tempStringArray[i]);
             }
             if (calorificRange[0] == 0 || calorificRange[1] == 0) {
+                logger.error("user entered params not in decimal format");
                 System.out.println("Please enter params in decimal format");
             } else if (calorificRange[0] < 1 || calorificRange[1] < 1) {
+                logger.error("user entered negative numbers or zero");
                 System.out.println("Range can not be negative or zero");
             } else {
                 break;
