@@ -71,19 +71,10 @@ public class ConsolePresentation {
 
             vegetableNumber = Integer.parseInt(params[0]);
             vegetableWeight = Integer.parseInt(params[1]);
-            if (vegetableNumber > 5 || vegetableNumber == 0) {
-                System.out.println("Please enter valid number of vegetable");
-                continue;
-            } else if (vegetableWeight == 0) {
-                System.out.println("Please enter weight of vegetable in decimal");
-                continue;
-            } else if (alreadyPutted.contains(vegetableNumber)) {
-                System.out.println("Wrong number. You already have  " + vegetablesMap.get(vegetableNumber) + " in your salad");
-                continue;
-            } else if (vegetableNumber < 1 || vegetableWeight < 1) {
-                System.out.println("Vegetable number and weight can not be zero or negative");
+            if (!isValidNumberAndWeight(vegetableNumber, vegetableWeight)){
                 continue;
             }
+
             alreadyPutted.add(vegetableNumber);
             System.out.println("Vegetable " + vegetablesMap.get(vegetableNumber) + " will be added to your salad");
 
@@ -149,5 +140,22 @@ public class ConsolePresentation {
             }
         }
         return calorificRange;
+    }
+
+    private static boolean isValidNumberAndWeight(int vegetableNumber, int vegetableWeight) {
+        if (vegetableNumber > 5 || vegetableNumber == 0) {
+            System.out.println("Please enter valid number of vegetable");
+            return false;
+        } else if (vegetableWeight == 0) {
+            System.out.println("Please enter weight of vegetable in decimal");
+            return false;
+        } else if (alreadyPutted.contains(vegetableNumber)) {
+            System.out.println("Wrong number. You already have  " + vegetablesMap.get(vegetableNumber) + " in your salad");
+            return false;
+        } else if (vegetableNumber < 1 || vegetableWeight < 1) {
+            System.out.println("Vegetable number and weight can not be zero or negative");
+            return false;
+        }
+        return true;
     }
 }
