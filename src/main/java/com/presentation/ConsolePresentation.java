@@ -6,6 +6,8 @@ import com.domain.vegetable.*;
 import java.util.*;
 
 public class ConsolePresentation {
+    private static Map<Integer, String> vegetablesMap;
+    private static List<Integer> alreadyPutted;
 
     public static void main(String[] args) {
 
@@ -44,13 +46,13 @@ public class ConsolePresentation {
         int vegetableNumber;
         int vegetableWeight;
         List<AbstractVegetable> vegetableList = new ArrayList<>();
-        Map<Integer, String> vegetablesMap = new HashMap<>();
+        vegetablesMap = new HashMap<>();
         vegetablesMap.put(1, "Carrot");
         vegetablesMap.put(2, "Cucumber");
         vegetablesMap.put(3, "Kale");
         vegetablesMap.put(4, "Onion");
         vegetablesMap.put(5, "Tomato");
-        List<Integer> alreadyPutted = new ArrayList<>();
+        alreadyPutted = new ArrayList<>();
 
         while (true) {
             input = scanner.nextLine().trim();
@@ -76,7 +78,7 @@ public class ConsolePresentation {
             }
 
             alreadyPutted.add(vegetableNumber);
-            System.out.println("Vegetable " + vegetablesMap.get(vegetableNumber) + " will be added to your salad");
+            System.out.println("Vegetable " + getVegetableMap().get(vegetableNumber) + " will be added to your salad");
 
             switch (vegetableNumber) {
                 case (1):
@@ -143,13 +145,15 @@ public class ConsolePresentation {
     }
 
     private static boolean isValidNumberAndWeight(int vegetableNumber, int vegetableWeight) {
+        Map<Integer, String> vegetablesMap = getVegetableMap();
+
         if (vegetableNumber > 5 || vegetableNumber == 0) {
             System.out.println("Please enter valid number of vegetable");
             return false;
         } else if (vegetableWeight == 0) {
             System.out.println("Please enter weight of vegetable in decimal");
             return false;
-        } else if (alreadyPutted.contains(vegetableNumber)) {
+        } else if (getAlreadyPutted().contains(vegetableNumber)) {
             System.out.println("Wrong number. You already have  " + vegetablesMap.get(vegetableNumber) + " in your salad");
             return false;
         } else if (vegetableNumber < 1 || vegetableWeight < 1) {
@@ -157,5 +161,15 @@ public class ConsolePresentation {
             return false;
         }
         return true;
+    }
+
+    private static Map<Integer, String> getVegetableMap() {
+
+        return vegetablesMap;
+    }
+
+    private static List<Integer> getAlreadyPutted(){
+
+        return alreadyPutted;
     }
 }
