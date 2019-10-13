@@ -4,13 +4,21 @@ import com.domain.salad.SimpleSalad;
 import com.domain.vegetable.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-public class ConsolePresentation {
+@Component
+public class ConsolePresentation implements CommandLineRunner {
     private static Map<Integer, String> vegetablesMap;
     private static List<Integer> alreadyPutted;
     private static final Logger logger = LoggerFactory.getLogger(ConsolePresentation.class);
+
+    @Override
+    public void run(String... args) throws Exception {
+        main(args);
+    }
 
     public static void main(String[] args) {
         logger.debug("Application successfully started");
@@ -65,6 +73,9 @@ public class ConsolePresentation {
 
             if (input.toUpperCase().equals("END")) {
                 logger.info("User chose to END his work with program");
+                if (vegetableList.isEmpty()) {
+                    System.exit(0);
+                }
                 System.out.println("You have ended putting vegetables to your salad");
                 break;
             } else if (input.equals("")) {
@@ -82,7 +93,7 @@ public class ConsolePresentation {
 
             vegetableNumber = Integer.parseInt(params[0]);
             vegetableWeight = Integer.parseInt(params[1]);
-            if (!isValidNumberAndWeight(vegetableNumber, vegetableWeight)){
+            if (!isValidNumberAndWeight(vegetableNumber, vegetableWeight)) {
                 continue;
             }
 
@@ -182,7 +193,7 @@ public class ConsolePresentation {
         return vegetablesMap;
     }
 
-    private static List<Integer> getAlreadyPutted(){
+    private static List<Integer> getAlreadyPutted() {
 
         return alreadyPutted;
     }
