@@ -75,6 +75,11 @@ public class ConsolePresentation {
                 continue;
             }
 
+            else if (alreadyPutted.contains(vegetableNumber)) {
+                System.out.println("Wrong number. You already have  " + vegetablesMap.get(vegetableNumber) + " in your salad");
+                continue;
+            }
+
             alreadyPutted.add(vegetableNumber);
             System.out.println("Vegetable " + vegetablesMap.get(vegetableNumber) + " will be added to your salad");
 
@@ -148,9 +153,6 @@ public class ConsolePresentation {
             return false;
         } else if (vegetableWeight == 0) {
             System.out.println("Please enter weight of vegetable in decimal");
-            return false;
-        } else if (alreadyPutted.contains(vegetableNumber)) {
-            System.out.println("Wrong number. You already have  " + vegetablesMap.get(vegetableNumber) + " in your salad");
             return false;
         } else if (vegetableNumber < 1 || vegetableWeight < 1) {
             System.out.println("Vegetable number and weight can not be zero or negative");
