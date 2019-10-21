@@ -4,6 +4,7 @@ import com.domain.Color;
 
 public class Tomato extends AbstractVegetable {
 
+    private int id;
     private VegetableType vegetableType = VegetableType.FRUIT;
     private String name = "Tomato";
     private Color color = Color.RED;
@@ -12,6 +13,14 @@ public class Tomato extends AbstractVegetable {
 
     public Tomato(int weight){
         this.weight = weight;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
