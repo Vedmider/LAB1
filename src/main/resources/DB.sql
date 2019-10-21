@@ -49,3 +49,6 @@ INSERT INTO `vegetable_type` VALUES (2,'Bulb'),(4,'Fruit'),(1,'Leafy'),(3,'Root'
 INSERT INTO `vegetable_color` VALUES (2,'Black'),(5,'Green'),(1,'Orange'),(4,'Red'),(6,'White'),(3,'Yellow');
 INSERT INTO `vegetable_prototype` VALUES (11,'Carrot',3,1,3),(12,'Cucumber',5,4,5),(13,'Kale',5,1,6),(14,'Onion',6,2,3),(15,'Tomato',4,4,9);
 INSERT INTO `vegetables` VALUES (7,11,200),(8,12,300),(9,14,230);
+ALTER TABLE `vegetable_type` ADD COLUMN `ordinal` int;
+ALTER TABLE `vegetable_color` ADD COLUMN `ordinal` int;
+
