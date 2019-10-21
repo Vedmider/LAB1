@@ -4,6 +4,7 @@ import com.domain.Color;
 
 public class Kale extends AbstractVegetable {
 
+    private int id;
     private VegetableType vegetableType = VegetableType.LEAFY;
     private String name = "Kale";
     private Color color = Color.GREEN;
@@ -12,6 +13,14 @@ public class Kale extends AbstractVegetable {
 
     public Kale(int weight) {
         this.weight = weight;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

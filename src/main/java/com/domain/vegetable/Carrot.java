@@ -4,6 +4,7 @@ import com.domain.Color;
 
 public class Carrot extends AbstractVegetable {
 
+    private int id;
     private VegetableType vegetableType = VegetableType.ROOT;
     private String name = "Carrot";
     private Color color = Color.ORANGE;
@@ -16,6 +17,14 @@ public class Carrot extends AbstractVegetable {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int countCalories() {
